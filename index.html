@@ -8,8 +8,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Meta etiquetas para redes sociales -->
-    <meta property="og:image" content="Logo-home.png">
     <link rel="icon" type="image/png" href="Logo-home.png">
 
     <style>
@@ -18,6 +16,8 @@
             --color-brown-dark: #3e2723;
             --color-brown-mid: #5d4037;
             --color-brown-light: #8d6e63;
+            --book-width: 300px;
+            --book-height: 400px;
         }
 
         body {
@@ -135,68 +135,123 @@
             text-align: center;
         }
 
-        .value-card-front {
-            background-color: transparent;
-        }
-
+        .value-card-front { background-color: transparent; }
         .value-card-back {
             background-color: var(--color-brown-dark);
             color: white;
             transform: rotateY(180deg);
         }
 
-        .value-card-front i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            color: var(--color-brown-dark);
-        }
+        .value-card-front i { font-size: 4rem; margin-bottom: 1rem; color: var(--color-brown-dark); }
+        .value-card-front .main-label { font-weight: 800; text-transform: uppercase; font-size: 1.2rem; color: var(--color-brown-dark); }
 
-        .value-card-front h3 {
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 1.1rem;
-            color: rgba(62, 39, 35, 0.5);
-            margin-bottom: -0.5rem;
-        }
-
-        .value-card-front .main-label {
-            font-weight: 800;
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            color: var(--color-brown-dark);
-        }
-
-        .value-card-back p {
-            font-size: 1rem;
-            font-weight: 600;
-            line-height: 1.4;
-        }
-
-        /* Diseño de Libro */
-        .book-wrapper {
+        /* --- LIBRO 3D EN CSS --- */
+        .book-container {
+            perspective: 1500px;
+            width: var(--book-width);
+            height: var(--book-height);
             position: relative;
+        }
+
+        .book {
             width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
-        .book-image { width: 100%; display: block; }
-        .book-content-overlay {
+
+        .book-container:hover .book {
+            transform: rotateY(-30deg) translateX(50px);
+        }
+
+        /* Portada */
+        .book-cover {
+            width: 100%;
+            height: 100%;
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10;
+            transform-origin: left;
+            transition: transform 0.8s ease;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            background-color: var(--color-brown-dark);
+            border-radius: 4px 15px 15px 4px;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
             display: flex;
-            padding: 12% 10% 10% 10%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-left: 5px solid rgba(0,0,0,0.2);
         }
-        .book-page {
-            width: 50%; padding: 0 5%;
-            text-align: center; display: flex; flex-direction: column; justify-content: center;
+
+        .book-container:hover .book-cover {
+            transform: rotateY(-160deg);
         }
-        .book-page h4 {
-            font-weight: 800; font-size: 0.9rem;
+
+        .book-cover h2 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            margin: 10px;
+        }
+
+        /* Páginas Interiores */
+        .book-pages {
+            width: 95%;
+            height: 95%;
+            position: absolute;
+            top: 2.5%;
+            left: 2.5%;
+            z-index: 5;
+            background: #fff;
+            box-shadow: inset 3px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            border-radius: 2px 10px 10px 2px;
+            overflow: hidden;
+        }
+
+        .inner-page {
+            width: 100%;
+            height: 100%;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-image: linear-gradient(90deg, #f9f9f9 0%, #fff 10%, #fff 90%, #f9f9f9 100%);
+        }
+
+        .inner-page h4 {
+            font-weight: 800;
+            color: var(--color-brown-dark);
+            margin-bottom: 15px;
             border-bottom: 2px solid var(--color-brown-dark);
-            margin-bottom: 0.5rem; display: inline-block;
+            text-transform: uppercase;
         }
-        .book-page p { font-size: 0.65rem; line-height: 1.3; color: #222; }
-        
+
+        .inner-page p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #444;
+            font-weight: 600;
+        }
+
+        /* Texto Dinámico */
+        .dynamic-text span {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .dynamic-text span:hover {
+            color: var(--color-brown-light);
+            transform: translateY(-5px);
+            cursor: default;
+        }
+
         /* Secciones */
         .blob-shape {
             background-color: var(--color-brown-dark);
@@ -206,7 +261,6 @@
             box-shadow: 15px 15px 0px rgba(93, 64, 55, 0.3);
         }
 
-        /* Nueva lógica para Definición */
         .definition-box {
             border: 4px solid var(--color-brown-dark);
             background: white;
@@ -218,7 +272,6 @@
             padding: 2rem;
             text-align: center;
             border-radius: 40px;
-            transition: all 0.3s ease;
         }
         
         #def-title {
@@ -287,9 +340,9 @@
         @media (max-width: 768px) {
             .hero-banner { height: 400px; }
             .nav-pill { font-size: 0.6rem; padding: 6px 12px; }
-            .hero-bottom-cta { bottom: 40px; font-size: 0.9rem; }
             .blob-shape { padding: 2rem; min-height: auto; }
             .definition-box { min-height: 250px; margin-top: 2rem; }
+            .book-container { transform: scale(0.8); }
         }
     </style>
 </head>
@@ -299,22 +352,16 @@
     <nav>
         <div class="container mx-auto px-4 flex items-center justify-between">
             <div class="flex-shrink-0">
-                <a href="https://wa.me/584242510523?text=Buenas%20noches!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" 
-                   target="_blank" 
-                   class="cta-btn text-xs px-4 py-2 border-1">
-                     ¡HAZ CRECER TU NEGOCIO!
-                </a>
+                <a href="https://wa.me/584242510523" target="_blank" class="cta-btn text-xs px-4 py-2 border-1"> ¡HAZ CRECER TU NEGOCIO! </a>
             </div>
-
             <div class="hidden md:flex flex-wrap justify-center gap-2">
                 <a href="#que-es" class="nav-pill">¿Qué es Capy?</a>
                 <a href="#hacemos" class="nav-pill">Que hacemos</a>
                 <a href="#somos" class="nav-pill">Quienes somos</a>
                 <a href="#contacto" class="nav-pill">Contactos</a>
             </div>
-
             <div class="flex-shrink-0">
-                <a href="index.html">
+                <a href="#">
                     <img src="Logo-home.png" alt="Capy Studios Logo" class="h-[50px] w-auto transition-transform hover:scale-110 hover:rotate-6" onerror="this.src='https://i.ibb.co/6YfQ1Z7/capy-placeholder-logo.png'">
                 </a>
             </div>
@@ -324,11 +371,7 @@
     <!-- Hero Banner -->
     <header class="hero-banner">
         <img src="presentacion.jpg" alt="Presentación Capy" class="hero-bg-img" onerror="this.src='https://i.ibb.co/hVpZ9hP/banner-placeholder.jpg'">
-        <a href="https://wa.me/584242510523?text=Buenas%20noches!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" 
-           target="_blank" 
-           class="cta-btn hero-bottom-cta">
-            ¡Haz crecer tu negocio!
-        </a>
+        <a href="https://wa.me/584242510523" target="_blank" class="cta-btn hero-bottom-cta"> ¡Haz crecer tu negocio! </a>
     </header>
 
     <div class="py-8"></div>
@@ -340,7 +383,6 @@
                 <div class="value-card-inner">
                     <div class="value-card-front">
                         <i class="fas fa-cog"></i>
-                        <h3>Funcionalidad</h3>
                         <div class="main-label">Funcionalidad</div>
                     </div>
                     <div class="value-card-back">
@@ -348,11 +390,11 @@
                     </div>
                 </div>
             </div>
+            <!-- Otros valores (omitidos por brevedad para centrar el cambio) -->
             <div class="value-card-container">
                 <div class="value-card-inner">
                     <div class="value-card-front">
                         <i class="fas fa-paint-brush"></i>
-                        <h3>Creatividad</h3>
                         <div class="main-label">Creatividad</div>
                     </div>
                     <div class="value-card-back">
@@ -364,7 +406,6 @@
                 <div class="value-card-inner">
                     <div class="value-card-front">
                         <i class="fas fa-comment"></i>
-                        <h3>Expresión</h3>
                         <div class="main-label">Expresión</div>
                     </div>
                     <div class="value-card-back">
@@ -376,7 +417,6 @@
                 <div class="value-card-inner">
                     <div class="value-card-front">
                         <i class="fas fa-users"></i>
-                        <h3>Comunicación</h3>
                         <div class="main-label">Comunicación</div>
                     </div>
                     <div class="value-card-back">
@@ -387,26 +427,34 @@
         </div>
     </section>
 
-    <!-- Sección ¿Qué es Capy? -->
+    <!-- Sección ¿Qué es Capy? Con LIBRO 3D CSS -->
     <section id="que-es" class="container mx-auto px-6 py-12">
         <div class="text-center mb-16">
             <div class="pill-tag">¿Qué es Capy?</div>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <p class="text-3xl font-bold leading-tight text-left">
-                Es un estudio creativo, que busca brindar los recursos y elementos que se necesitan para mejorar, actualizar, o crear la identidad de cualquier negocio o de uso personal.
+            <p class="text-3xl font-bold leading-tight text-left dynamic-text">
+                <span>Es</span> <span>un</span> <span>estudio</span> <span>creativo,</span> <span>que</span> <span>busca</span> <span>brindar</span> <span>los</span> <span>recursos</span> <span>y</span> <span>elementos</span> <span>que</span> <span>se</span> <span>necesitan</span> <span>para</span> <span>mejorar,</span> <span>actualizar,</span> <span>o</span> <span>crear</span> <span>la</span> <span>identidad</span> <span>de</span> <span>cualquier</span> <span>negocio</span> <span>o</span> <span>de</span> <span>uso</span> <span>personal.</span>
             </p>
             <div class="flex justify-center">
-                <div class="book-wrapper">
-                    <img src="libro-abierto.png" alt="Misión y Visión" class="book-image" onerror="this.src='https://i.ibb.co/6P6Yh9B/open-book-placeholder.png'">
-                    <div class="book-content-overlay">
-                        <div class="book-page">
-                            <h4>MISIÓN</h4>
-                            <p>Darle acceso al público venezolano a un servicio creativo de calidad y funcional, que cumpla con las expectativas y su función.</p>
+                <div class="book-container">
+                    <div class="book">
+                        <!-- Portada -->
+                        <div class="book-cover">
+                            <img src="Logo-home.png" alt="Logo" class="w-20 mb-4 opacity-80" onerror="this.style.display='none'">
+                            <h2>CAPY<br>STUDIOS</h2>
+                            <p class="text-xs uppercase tracking-widest mt-4">Manual de Marca</p>
                         </div>
-                        <div class="book-page">
-                            <h4>VISIÓN</h4>
-                            <p>Desarrollar una empresa capaz de alcanzar la sostenibilidad y expansión por todo el territorio nacional.</p>
+                        <!-- Página interior -->
+                        <div class="book-pages">
+                            <div class="inner-page">
+                                <h4>MISIÓN</h4>
+                                <p>Darle acceso al público venezolano a un servicio creativo de calidad y funcional, que cumpla con las expectativas y su función.</p>
+                                <div class="mt-8">
+                                    <h4>VISIÓN</h4>
+                                    <p>Desarrollar una empresa capaz de alcanzar la sostenibilidad y expansión por todo el territorio nacional.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -414,23 +462,23 @@
         </div>
     </section>
 
-    <!-- Sección Que Hacemos Dinámica -->
+    <!-- Sección Que Hacemos -->
     <section id="hacemos" class="py-20">
         <div class="container mx-auto px-6">
             <div class="pill-tag mb-12">Que hacemos</div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                 <div class="blob-shape">
                     <ul class="text-2xl md:text-3xl font-black space-y-4 md:space-y-6">
-                        <li class="service-item" onmouseover="updateDef('DISEÑO GRÁFICO', 'La base visual de tu negocio. Creamos logotipos, manuales de marca y piezas publicitarias que comunican profesionalismo y confianza.')">DISEÑO GRÁFICO</li>
-                        <li class="service-item" onmouseover="updateDef('ILUSTRACIÓN', 'Arte personalizado para dar un toque único. Desde mascotas de marca hasta contenido editorial que ninguna otra empresa podrá replicar.')">ILUSTRACIÓN</li>
-                        <li class="service-item" onmouseover="updateDef('COMMUNITY MANAGER', 'No solo publicamos, conectamos. Estrategia de contenidos y gestión de redes para que tu comunidad crezca y se convierta en clientes.')">COMMUNITY MANAGER</li>
-                        <li class="service-item" onmouseover="updateDef('NARRACIÓN', 'Historias que cobran vida. Servicio especializado para audiolibros, videos explicativos o presentaciones que necesitan impacto narrativo.')">NARRACIÓN</li>
-                        <li class="service-item" onmouseover="updateDef('LOCUCIÓN', 'La voz profesional para tus anuncios. Calidad de estudio para radio, televisión y plataformas digitales que proyecta elegancia y cercanía.')">LOCUCIÓN</li>
+                        <li class="service-item" onmouseover="updateDef('DISEÑO GRÁFICO', 'La base visual de tu negocio. Creamos logotipos, manuales de marca y piezas publicitarias que comunican profesionalismo.')">DISEÑO GRÁFICO</li>
+                        <li class="service-item" onmouseover="updateDef('ILUSTRACIÓN', 'Arte personalizado para dar un toque único. Desde mascotas de marca hasta contenido editorial único.')">ILUSTRACIÓN</li>
+                        <li class="service-item" onmouseover="updateDef('COMMUNITY MANAGER', 'No solo publicamos, conectamos. Estrategia de contenidos para que tu comunidad crezca.')">COMMUNITY MANAGER</li>
+                        <li class="service-item" onmouseover="updateDef('NARRACIÓN', 'Historias que cobran vida. Servicio especializado para audiolibros o videos explicativos con impacto.')">NARRACIÓN</li>
+                        <li class="service-item" onmouseover="updateDef('LOCUCIÓN', 'La voz profesional para tus anuncios. Calidad de estudio para proyectar elegancia y cercanía.')">LOCUCIÓN</li>
                     </ul>
                 </div>
                 <div class="definition-box" id="definition-display">
                     <h2 id="def-title">DEFINICIÓN</h2>
-                    <p id="def-text">Pasa el mouse sobre uno de nuestros servicios para conocer cómo podemos transformar tu negocio con nuestra experiencia creativa.</p>
+                    <p id="def-text">Pasa el mouse sobre uno de nuestros servicios para conocer cómo podemos transformar tu negocio.</p>
                 </div>
             </div>
         </div>
@@ -447,9 +495,7 @@
                 <div class="profile-info">
                     <h4 class="font-bold text-xl mb-1">SHAIR APONTE</h4>
                     <p class="text-sm opacity-80 mb-4">DISEÑADOR GRÁFICO</p>
-                    <a href="https://www.instagram.com/shair_aponte_art" target="_blank" class="inline-block bg-white text-[#3e2723] px-6 py-2 rounded-xl font-bold hover:bg-[#f4e8d1] transition-all">
-                        <i class="fab fa-instagram"></i> VER MÁS
-                    </a>
+                    <a href="https://www.instagram.com/shair_aponte_art" target="_blank" class="inline-block bg-white text-[#3e2723] px-6 py-2 rounded-xl font-bold hover:bg-[#f4e8d1] transition-all"> <i class="fab fa-instagram"></i> VER MÁS </a>
                 </div>
             </div>
             <div class="profile-container">
@@ -459,69 +505,42 @@
                 <div class="profile-info">
                     <h4 class="font-bold text-xl mb-1">ARLEY VELASQUEZ</h4>
                     <p class="text-sm opacity-80 mb-4">NARRADOR Y LOCUTOR</p>
-                    <a href="https://www.instagram.com/arley_vlz" target="_blank" class="inline-block bg-white text-[#3e2723] px-6 py-2 rounded-xl font-bold hover:bg-[#f4e8d1] transition-all">
-                        <i class="fab fa-instagram"></i> VER MÁS
-                    </a>
+                    <a href="https://www.instagram.com/arley_vlz" target="_blank" class="inline-block bg-white text-[#3e2723] px-6 py-2 rounded-xl font-bold hover:bg-[#f4e8d1] transition-all"> <i class="fab fa-instagram"></i> VER MÁS </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Contacto -->
-    <section id="contacto" class="footer-section">
+    <!-- Footer -->
+    <footer id="contacto" class="footer-section">
         <div class="footer-curve"></div>
         <div class="container mx-auto px-6 pt-10 text-white">
             <h3 class="text-center font-bold text-3xl mb-16 uppercase tracking-widest">Contáctanos</h3>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-end">
                 <div class="text-center">
-                    <a href="https://www.instagram.com/capy_studios_oficial" target="_blank">
-                        <div class="bg-white p-4 rounded-[30px] inline-block">
-                            <img src="qr-contacto.png" alt="QR" width="180" 
-                                 onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.instagram.com/capy_studios_oficial'">
-                        </div>
-                    </a>
+                    <div class="bg-white p-4 rounded-[30px] inline-block">
+                        <img src="qr-contacto.png" alt="QR" width="180" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.instagram.com/capy_studios_oficial'">
+                    </div>
                     <p class="mt-4 font-bold text-sm">@CAPY_STUDIOS_OFICIAL</p>
                 </div>
-
                 <div class="flex flex-col items-center lg:items-start">
-                    <a href="https://www.tiktok.com/@capy_studios_oficial" target="_blank" class="social-button">
-                        <i class="fab fa-tiktok"></i> Tik Tok
-                    </a>
-                    <a href="https://www.instagram.com/capy_studios_oficial" target="_blank" class="social-button">
-                        <i class="fab fa-instagram"></i> Instagram
-                    </a>
-                    <a href="https://wa.me/584242510523?text=Buenas%20noches!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" target="_blank" class="social-button">
-                        <i class="fab fa-whatsapp"></i> Whatsapp
-                    </a>
+                    <a href="https://www.tiktok.com/@capy_studios_oficial" target="_blank" class="social-button"> <i class="fab fa-tiktok"></i> Tik Tok </a>
+                    <a href="https://www.instagram.com/capy_studios_oficial" target="_blank" class="social-button"> <i class="fab fa-instagram"></i> Instagram </a>
+                    <a href="https://wa.me/584242510523" target="_blank" class="social-button"> <i class="fab fa-whatsapp"></i> Whatsapp </a>
                 </div>
-
                 <div class="flex justify-center items-end">
                     <img src="mascota-capy.png" alt="Mascota" class="w-full max-w-[450px] relative bottom-[-40px] drop-shadow-2xl" onerror="this.style.display='none'">
                 </div>
             </div>
-            <div class="mt-20 border-t border-white/20 pt-8 text-center text-xs opacity-50">
-                © 2024 CAPY STUDIOS. TODO EL TERRITORIO NACIONAL.
-            </div>
+            <div class="mt-20 border-t border-white/20 pt-8 text-center text-xs opacity-50"> © 2024 CAPY STUDIOS. TODO EL TERRITORIO NACIONAL. </div>
         </div>
-    </section>
+    </footer>
 
     <script>
         function updateDef(title, text) {
-            const titleElement = document.getElementById('def-title');
-            const textElement = document.getElementById('def-text');
-            const box = document.getElementById('definition-display');
-
-            // Efecto de parpadeo suave al cambiar
-            box.style.opacity = '0.5';
-            
-            setTimeout(() => {
-                titleElement.innerText = title;
-                textElement.innerText = text;
-                box.style.opacity = '1';
-                box.style.borderColor = 'var(--color-brown-light)';
-            }, 150);
+            document.getElementById('def-title').innerText = title;
+            document.getElementById('def-text').innerText = text;
         }
     </script>
-
 </body>
 </html>
