@@ -21,6 +21,7 @@
             color: var(--color-brown-dark);
             margin: 0;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         .grid-pattern {
@@ -47,11 +48,42 @@
             background-image: url('hero-bg.jpg');
             background-size: cover;
             background-position: center;
-            height: 450px;
+            height: 500px;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Valores - Estilo presentacion.jpg */
+        /* Botón de Llamada a la Acción en Hero - Link Directo a WhatsApp */
+        .cta-hero-btn {
+            background-color: var(--color-brown-dark);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: 2px solid white;
+            animation: pulse-animation 2s infinite;
+        }
+
+        .cta-hero-btn:hover {
+            transform: scale(1.05) translateY(-3px);
+            background-color: var(--color-brown-mid);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+        }
+
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(62, 39, 35, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(62, 39, 35, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(62, 39, 35, 0); }
+        }
+
+        /* Valores */
         .value-card {
             border: 4px solid var(--color-brown-dark);
             border-radius: 40px;
@@ -63,7 +95,9 @@
             align-items: center;
             justify-content: center;
             min-height: 300px;
+            transition: transform 0.3s ease;
         }
+        .value-card:hover { transform: translateY(-10px); }
         .value-card i {
             font-size: 5rem;
             margin-bottom: 1rem;
@@ -73,7 +107,7 @@
             font-weight: 700;
             text-transform: uppercase;
             font-size: 1.1rem;
-            color: rgba(62, 39, 35, 0.5); /* Texto tenue de fondo */
+            color: rgba(62, 39, 35, 0.5);
             margin-bottom: -0.5rem;
         }
         .value-card .main-label {
@@ -83,7 +117,50 @@
             color: var(--color-brown-dark);
         }
 
-        /* Que Hacemos - Estilo pág.jpg */
+        /* Diseño de Libro */
+        .book-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .book-image { width: 100%; display: block; }
+        .book-content-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            padding: 12% 10% 10% 10%;
+        }
+        .book-page {
+            width: 50%;
+            padding: 0 5%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .book-page h4 {
+            font-weight: 800;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--color-brown-dark);
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        .book-page p { font-size: 0.65rem; line-height: 1.3; color: #222; }
+        .pen-overlay {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 150px;
+            transform: rotate(-10deg);
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        /* Que Hacemos */
         .blob-shape {
             background-color: var(--color-brown-dark);
             color: white;
@@ -111,7 +188,7 @@
             letter-spacing: 5px;
         }
 
-        /* Quienes Somos - Estilo pág.jpg */
+        /* Quienes Somos */
         .profile-container {
             background-color: var(--color-brown-dark);
             border-radius: 40px;
@@ -119,34 +196,40 @@
             width: 320px;
             color: white;
             text-align: center;
+            transition: transform 0.3s ease;
         }
+        .profile-container:hover { transform: translateY(-5px); }
         .profile-photo {
             background: white;
             border-radius: 20px;
             margin-bottom: 20px;
             overflow: hidden;
             height: 250px;
+            border: 3px solid rgba(255,255,255,0.1);
         }
         .profile-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .profile-info h4 { font-weight: 800; font-size: 1.2rem; line-height: 1; }
-        .profile-info p { font-size: 1rem; text-transform: uppercase; margin-bottom: 15px; }
+        .profile-info h4 { font-weight: 800; font-size: 1.4rem; line-height: 1.2; margin-bottom: 4px; color: #fff; }
+        .profile-info p { font-size: 0.9rem; text-transform: uppercase; margin-bottom: 20px; color: var(--color-cream); letter-spacing: 1px; }
         .btn-ver-mas {
             background: white;
             color: var(--color-brown-dark);
             border-radius: 12px;
-            padding: 8px 20px;
+            padding: 10px 24px;
             font-weight: 800;
             display: inline-flex;
             align-items: center;
             gap: 10px;
             font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
         }
+        .btn-ver-mas:hover { background: var(--color-cream); transform: scale(1.05); }
 
-        /* Footer / Contacto - Estilo Screenshot_1.png */
+        /* Footer */
         .footer-section {
             background-color: var(--color-brown-dark);
             margin-top: 100px;
@@ -162,12 +245,7 @@
             background-color: var(--color-brown-dark);
             border-radius: 50% 50% 0 0 / 100% 100% 0 0;
         }
-        .qr-box {
-            background: white;
-            padding: 15px;
-            border-radius: 30px;
-            display: inline-block;
-        }
+        .qr-box { background: white; padding: 15px; border-radius: 30px; display: inline-block; }
         .social-button {
             background-color: var(--color-cream);
             color: var(--color-brown-dark);
@@ -183,10 +261,13 @@
             font-size: 1.3rem;
             text-transform: uppercase;
             margin-bottom: 15px;
+            text-decoration: none;
+            transition: all 0.2s ease;
         }
+        .social-button:hover { transform: scale(1.05); background-color: #fff; }
         .mascot-large {
             width: 100%;
-            max-width: 450px; /* Tamaño grande como en pág.jpg */
+            max-width: 450px;
             position: relative;
             bottom: -40px;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
@@ -197,7 +278,8 @@
             top: 0;
             background: var(--color-brown-dark);
             z-index: 1000;
-            padding: 15px 0;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .nav-pill {
             color: white;
@@ -205,26 +287,57 @@
             border-radius: 50px;
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .nav-pill:hover { background: rgba(255,255,255,0.2); }
+
+        .logo-home-btn {
+            height: 50px;
+            width: auto;
+            transition: transform 0.2s ease;
+        }
+        .logo-home-btn:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body class="grid-pattern">
 
-    <!-- Navegación estilo botones superiores -->
+    <!-- Navegación con Logo en la esquina derecha -->
     <nav>
-        <div class="container mx-auto flex flex-wrap justify-center gap-4 px-4">
-            <a href="#que-es" class="nav-pill">¿Qué es Capy?</a>
-            <a href="#hacemos" class="nav-pill">Que hacemos</a>
-            <a href="#somos" class="nav-pill">Quienes somos</a>
-            <a href="#contacto" class="nav-pill">Contactos</a>
+        <div class="container mx-auto px-6 flex items-center justify-between">
+            <!-- Espaciador a la izquierda para mantener los botones centrados -->
+            <div class="hidden lg:block w-[100px]"></div>
+
+            <!-- Botones Centrales -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="#que-es" class="nav-pill">¿Qué es Capy?</a>
+                <a href="#hacemos" class="nav-pill">Que hacemos</a>
+                <a href="#somos" class="nav-pill">Quienes somos</a>
+                <a href="#contacto" class="nav-pill">Contactos</a>
+            </div>
+
+            <!-- Logo en la esquina superior derecha -->
+            <div class="ml-4">
+                <a href="index.html">
+                    <img src="Logo-home.png" alt="Capy Studios Logo" class="logo-home-btn" onerror="this.src='https://i.ibb.co/6YfQ1Z7/capy-placeholder-logo.png'">
+                </a>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero Banner -->
-    <header class="hero-banner"></header>
+    <!-- Hero Banner con Botón Central vinculado a WhatsApp -->
+    <header class="hero-banner">
+        <a href="https://wa.me/584242510523?text=Buenas%20noches!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" 
+           target="_blank" 
+           class="cta-hero-btn">
+            ¡Haz crecer tu negocio!
+        </a>
+    </header>
 
     <!-- Valores -->
     <section class="container mx-auto px-6 py-20">
@@ -258,20 +371,23 @@
             <div class="pill-tag">¿Qué es Capy?</div>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <p class="text-2xl font-bold leading-relaxed text-left">
+            <p class="text-3xl font-bold leading-tight text-left">
                 Es un estudio creativo, que busca brindar los recursos y elementos que se necesitan para mejorar, actualizar, o crear la identidad de cualquier negocio o de uso personal.
             </p>
             <div class="flex justify-center">
-                <!-- Representación visual del libro Misión/Visión -->
-                <div class="shadow-2xl flex bg-white border border-gray-200 w-full max-w-lg">
-                    <div class="w-1/2 p-6 border-r border-gray-100">
-                        <h4 class="font-bold text-center border-b-2 border-brown-900 mb-4">MISIÓN</h4>
-                        <p class="text-xs leading-relaxed">Darle acceso al público venezolano a un servicio creativo de calidad y funcional, que cumpla con las expectativas y su función dando una correcta orientación a los consumidores para el uso de dichos elementos.</p>
+                <div class="book-wrapper">
+                    <img src="libro-abierto.png" alt="Misión y Visión" class="book-image" onerror="this.src='https://i.ibb.co/6P6Yh9B/open-book-placeholder.png'">
+                    <div class="book-content-overlay">
+                        <div class="book-page">
+                            <h4>MISIÓN</h4>
+                            <p>Darle acceso al público venezolano a un servicio creativo de calidad y funcional, que cumpla con las expectativas y su función dando una correcta orientación a los consumidores para el uso de dichos elementos.</p>
+                        </div>
+                        <div class="book-page">
+                            <h4>VISIÓN</h4>
+                            <p>Se busca desarrollar una empresa capaz de alcanzar la sostenibilidad, ofreciendo algo realmente funcional a los consumidores de sus servicios, permitiendo la expansión del estudio por todo el territorio nacional.</p>
+                        </div>
                     </div>
-                    <div class="w-1/2 p-6">
-                        <h4 class="font-bold text-center border-b-2 border-brown-900 mb-4">VISIÓN</h4>
-                        <p class="text-xs leading-relaxed">Se busca desarrollar una empresa capaz de alcanzar la sostenibilidad, ofreciendo algo realmente funcional a los consumidores de sus servicios, permitiendo la expansión del estudio por todo el territorio nacional.</p>
-                    </div>
+                    <img src="plumon.png" alt="Plumón" class="pen-overlay" onerror="this.src='https://i.ibb.co/3Y8M4tW/pen-placeholder.png'">
                 </div>
             </div>
         </div>
@@ -302,26 +418,28 @@
     <section id="somos" class="container mx-auto px-6 py-20 text-center">
         <div class="pill-tag mb-20">Quienes somos</div>
         <div class="flex flex-wrap justify-center gap-12">
+            <!-- Perfil 1: Shair Aponte -->
             <div class="profile-container">
                 <div class="profile-photo">
-                    <img src="foto-perfil-1.jpg" alt="Perfil 1" onerror="this.src='https://i.pravatar.cc/400?u=capy1'">
+                    <img src="foto-perfil-1.jpg" alt="Shair Aponte" onerror="this.src='https://i.pravatar.cc/400?u=shairaponte'">
                 </div>
                 <div class="profile-info">
-                    <h4>NOMBRE</h4>
-                    <p>PROFESIÓN</p>
-                    <a href="#" class="btn-ver-mas">
+                    <h4>SHAIR APONTE</h4>
+                    <p>DISEÑADOR GRÁFICO</p>
+                    <a href="https://www.instagram.com/shair_aponte_art?igsh=c3VmOThvdDk0Mnl2" target="_blank" class="btn-ver-mas">
                         <i class="fab fa-instagram"></i> VER MÁS
                     </a>
                 </div>
             </div>
+            <!-- Perfil 2: Arley Velasquez -->
             <div class="profile-container">
                 <div class="profile-photo">
-                    <img src="foto-perfil-2.jpg" alt="Perfil 2" onerror="this.src='https://i.pravatar.cc/400?u=capy2'">
+                    <img src="foto-perfil-2.jpg" alt="Arley Velasquez" onerror="this.src='https://i.pravatar.cc/400?u=arleyvelasquez'">
                 </div>
                 <div class="profile-info">
-                    <h4>NOMBRE</h4>
-                    <p>PROFESIÓN</p>
-                    <a href="#" class="btn-ver-mas">
+                    <h4>ARLEY VELASQUEZ</h4>
+                    <p>NARRADOR Y LOCUTOR</p>
+                    <a href="https://www.instagram.com/arley_vlz?igsh=MXFjcmU3MjIxZ2R4bQ==" target="_blank" class="btn-ver-mas">
                         <i class="fab fa-instagram"></i> VER MÁS
                     </a>
                 </div>
@@ -336,29 +454,28 @@
             <h3 class="text-center font-bold text-3xl mb-16 uppercase tracking-widest">Contáctanos</h3>
             
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-end">
-                <!-- QR -->
                 <div class="text-center mb-10 lg:mb-0">
-                    <div class="qr-box">
-                        <img src="qr-contacto.png" alt="QR" width="180" 
-                             onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://instagram.com/capy_studios_oficial'">
-                    </div>
+                    <a href="https://www.instagram.com/capy_studios_oficial" target="_blank">
+                        <div class="qr-box">
+                            <img src="qr-contacto.png" alt="QR" width="180" 
+                                 onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.instagram.com/capy_studios_oficial?igsh=d2Z3dHlhNmpzd2gy'">
+                        </div>
+                    </a>
                     <p class="mt-4 font-bold text-sm">@CAPY_STUDIOS_OFICIAL</p>
                 </div>
 
-                <!-- Botones Redes -->
                 <div class="flex flex-col items-center lg:items-start mb-10 lg:mb-0">
-                    <a href="#" class="social-button">
+                    <a href="https://www.tiktok.com/@capy_studios_oficial?_r=1&_t=ZS-9526ZoDvpqa" target="_blank" class="social-button">
                         <i class="fab fa-tiktok"></i> Tik Tok
                     </a>
-                    <a href="#" class="social-button">
+                    <a href="https://www.instagram.com/capy_studios_oficial?igsh=d2Z3dHlhNmpzd2gy" target="_blank" class="social-button">
                         <i class="fab fa-instagram"></i> Instagram
                     </a>
-                    <a href="#" class="social-button">
+                    <a href="https://wa.me/584242510523?text=Buenas%20noches!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" target="_blank" class="social-button">
                         <i class="fab fa-whatsapp"></i> Whatsapp
                     </a>
                 </div>
 
-                <!-- Mascota Grande -->
                 <div class="flex justify-center items-end">
                     <img src="mascota-capy.png" alt="Mascota" class="mascot-large" onerror="this.style.display='none'">
                 </div>
