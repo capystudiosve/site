@@ -7,11 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Esta línea controla la imagen que sale en WhatsApp y redes sociales -->
-<meta property="og:image" content="Logo-home.png">
+    
+    <!-- Meta etiquetas para redes sociales -->
+    <meta property="og:image" content="Logo-home.png">
+    <link rel="icon" type="image/png" href="Logo-home.png">
 
-<!-- Esta línea controla el icono pequeño que aparece en la pestaña del navegador -->
-<link rel="icon" type="image/png" href="Logo-home.png">
     <style>
         :root {
             --color-cream: #f4e8d1;
@@ -48,16 +48,15 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
 
-        /* Hero Banner - Contenedor principal */
+        /* Hero Banner */
         .hero-banner {
             background-color: #f3e5ab; 
             position: relative;
             width: 100%;
             height: 600px;
             display: flex;
-            align-items: flex-end; /* Alinea el contenido (botón) al final */
+            align-items: flex-end;
             justify-content: center;
-            overflow: visible; /* IMPORTANTE: Para que el botón no se corte si sobresale un poco */
         }
 
         .hero-bg-img {
@@ -70,7 +69,6 @@
             z-index: 1;
         }
 
-        /* Botón de Llamada a la Acción */
         .cta-btn {
             background-color: var(--color-brown-dark);
             color: white;
@@ -86,20 +84,12 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            white-space: nowrap;
             z-index: 10;
         }
 
-        .cta-btn:hover {
-            transform: scale(1.05) translateY(-3px);
-            background-color: var(--color-brown-mid);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.4);
-        }
-
-        /* Ajuste de posición del botón sobre el banner */
         .hero-bottom-cta {
             position: relative;
-            bottom: 60px; /* Separación del borde inferior del banner */
+            bottom: 60px;
             z-index: 20;
             animation: pulse-animation 2s infinite;
         }
@@ -110,38 +100,76 @@
             100% { box-shadow: 0 0 0 0 rgba(62, 39, 35, 0); }
         }
 
-        /* Valores */
-        .value-card {
+        /* --- TARJETAS INTERACTIVAS (FLIP CARDS) --- */
+        .value-card-container {
+            perspective: 1000px;
+            height: 350px;
+        }
+
+        .value-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .value-card-container:hover .value-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .value-card-front, .value-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
             border: 4px solid var(--color-brown-dark);
             border-radius: 40px;
-            padding: 2rem;
-            text-align: center;
-            background: transparent;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 300px;
-            transition: transform 0.3s ease;
+            padding: 2rem;
+            text-align: center;
         }
-        .value-card:hover { transform: translateY(-10px); }
-        .value-card i {
-            font-size: 5rem;
+
+        .value-card-front {
+            background-color: transparent;
+        }
+
+        .value-card-back {
+            background-color: var(--color-brown-dark);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .value-card-front i {
+            font-size: 4rem;
             margin-bottom: 1rem;
             color: var(--color-brown-dark);
         }
-        .value-card h3 {
+
+        .value-card-front h3 {
             font-weight: 700;
             text-transform: uppercase;
             font-size: 1.1rem;
             color: rgba(62, 39, 35, 0.5);
             margin-bottom: -0.5rem;
         }
-        .value-card .main-label {
+
+        .value-card-front .main-label {
             font-weight: 800;
             text-transform: uppercase;
             font-size: 1.2rem;
             color: var(--color-brown-dark);
+        }
+
+        .value-card-back p {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
         }
 
         /* Diseño de Libro */
@@ -154,187 +182,114 @@
         .book-image { width: 100%; display: block; }
         .book-content-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             display: flex;
             padding: 12% 10% 10% 10%;
         }
         .book-page {
-            width: 50%;
-            padding: 0 5%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            width: 50%; padding: 0 5%;
+            text-align: center; display: flex; flex-direction: column; justify-content: center;
         }
         .book-page h4 {
-            font-weight: 800;
-            font-size: 0.9rem;
+            font-weight: 800; font-size: 0.9rem;
             border-bottom: 2px solid var(--color-brown-dark);
-            margin-bottom: 0.5rem;
-            display: inline-block;
+            margin-bottom: 0.5rem; display: inline-block;
         }
         .book-page p { font-size: 0.65rem; line-height: 1.3; color: #222; }
-        .pen-overlay {
-            position: absolute;
-            bottom: -20px;
-            right: -20px;
-            width: 150px;
-            transform: rotate(-10deg);
-            z-index: 20;
-            pointer-events: none;
-        }
-
-        /* Que Hacemos */
+        
+        /* Secciones */
         .blob-shape {
             background-color: var(--color-brown-dark);
-            color: white;
-            border-radius: 0 100px 100px 100px;
-            padding: 3rem;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            color: white; border-radius: 0 100px 100px 100px;
+            padding: 3rem; min-height: 400px;
+            display: flex; flex-direction: column; justify-content: center;
             box-shadow: 15px 15px 0px rgba(93, 64, 55, 0.3);
         }
+
+        /* Nueva lógica para Definición */
         .definition-box {
-            border: 2px solid #ccc;
+            border: 4px solid var(--color-brown-dark);
             background: white;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 400px;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 40px;
+            transition: all 0.3s ease;
         }
-        .definition-box h2 {
-            font-size: 4rem;
-            color: #ddd;
-            font-weight: 700;
+        
+        #def-title {
+            font-size: 2.5rem;
+            color: var(--color-brown-dark);
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            margin-bottom: 1rem;
         }
 
-        /* Quienes Somos */
+        #def-text {
+            font-size: 1.2rem;
+            color: var(--color-brown-mid);
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .service-item {
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .service-item:hover {
+            transform: translateX(20px);
+            color: #f3e5ab;
+        }
+
+        /* Perfiles */
         .profile-container {
             background-color: var(--color-brown-dark);
-            border-radius: 40px;
-            padding: 30px;
-            width: 320px;
-            color: white;
-            text-align: center;
-            transition: transform 0.3s ease;
+            border-radius: 40px; padding: 30px; width: 320px;
+            color: white; text-align: center;
         }
-        .profile-container:hover { transform: translateY(-5px); }
         .profile-photo {
-            background: white;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            height: 250px;
-            border: 3px solid rgba(255,255,255,0.1);
+            background: white; border-radius: 20px; margin-bottom: 20px;
+            overflow: hidden; height: 250px; border: 3px solid rgba(255,255,255,0.1);
         }
-        .profile-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .profile-info h4 { font-weight: 800; font-size: 1.4rem; line-height: 1.2; margin-bottom: 4px; color: #fff; }
-        .profile-info p { font-size: 0.9rem; text-transform: uppercase; margin-bottom: 20px; color: var(--color-cream); letter-spacing: 1px; }
-        .btn-ver-mas {
-            background: white;
-            color: var(--color-brown-dark);
-            border-radius: 12px;
-            padding: 10px 24px;
-            font-weight: 800;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-        .btn-ver-mas:hover { background: var(--color-cream); transform: scale(1.05); }
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
 
         /* Footer */
-        .footer-section {
-            background-color: var(--color-brown-dark);
-            margin-top: 100px;
-            position: relative;
-            padding-bottom: 40px;
-        }
+        .footer-section { background-color: var(--color-brown-dark); margin-top: 100px; position: relative; padding-bottom: 40px; }
         .footer-curve {
-            position: absolute;
-            top: -60px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background-color: var(--color-brown-dark);
-            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            position: absolute; top: -60px; left: 0; width: 100%; height: 100px;
+            background-color: var(--color-brown-dark); border-radius: 50% 50% 0 0 / 100% 100% 0 0;
         }
-        .qr-box { background: white; padding: 15px; border-radius: 30px; display: inline-block; }
         .social-button {
-            background-color: var(--color-cream);
-            color: var(--color-brown-dark);
-            padding: 15px 25px;
-            border-radius: 15px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 15px;
-            width: 100%;
-            max-width: 350px;
-            font-size: 1.3rem;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            text-decoration: none;
-            transition: all 0.2s ease;
+            background-color: var(--color-cream); color: var(--color-brown-dark);
+            padding: 15px 25px; border-radius: 15px; font-weight: 800;
+            display: flex; align-items: center; gap: 15px; width: 100%;
+            max-width: 350px; font-size: 1.3rem; text-transform: uppercase;
+            margin-bottom: 15px; text-decoration: none; transition: 0.2s;
         }
         .social-button:hover { transform: scale(1.05); background-color: #fff; }
-        .mascot-large {
-            width: 100%;
-            max-width: 450px;
-            position: relative;
-            bottom: -40px;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-        }
 
         nav {
-            position: sticky;
-            top: 0;
-            background: var(--color-brown-dark);
-            z-index: 1000;
-            padding: 12px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            position: sticky; top: 0; background: var(--color-brown-dark);
+            z-index: 1000; padding: 12px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
         .nav-pill {
-            color: white;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 8px 16px; border-radius: 50px;
+            font-weight: 700; text-transform: uppercase; font-size: 0.75rem;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
             text-decoration: none;
-            transition: all 0.2s;
-        }
-        .nav-pill:hover { background: rgba(255,255,255,0.25); color: var(--color-cream); }
-
-        .logo-home-btn {
-            height: 50px;
-            width: auto;
-            transition: transform 0.2s ease;
-        }
-        .logo-home-btn:hover {
-            transform: scale(1.1) rotate(5deg);
         }
 
         @media (max-width: 768px) {
             .hero-banner { height: 400px; }
             .nav-pill { font-size: 0.6rem; padding: 6px 12px; }
-            .hero-bottom-cta { bottom: 40px; font-size: 0.9rem; padding: 10px 20px; }
+            .hero-bottom-cta { bottom: 40px; font-size: 0.9rem; }
+            .blob-shape { padding: 2rem; min-height: auto; }
+            .definition-box { min-height: 250px; margin-top: 2rem; }
         }
     </style>
 </head>
@@ -344,7 +299,7 @@
     <nav>
         <div class="container mx-auto px-4 flex items-center justify-between">
             <div class="flex-shrink-0">
-                <a href="https://wa.me/584242510523" 
+                <a href="https://wa.me/584242510523?text=Buenas%20noches!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" 
                    target="_blank" 
                    class="cta-btn text-xs px-4 py-2 border-1">
                      ¡HAZ CRECER TU NEGOCIO!
@@ -360,19 +315,16 @@
 
             <div class="flex-shrink-0">
                 <a href="index.html">
-                    <img src="Logo-home.png" alt="Capy Studios Logo" class="logo-home-btn" onerror="this.src='https://i.ibb.co/6YfQ1Z7/capy-placeholder-logo.png'">
+                    <img src="Logo-home.png" alt="Capy Studios Logo" class="h-[50px] w-auto transition-transform hover:scale-110 hover:rotate-6" onerror="this.src='https://i.ibb.co/6YfQ1Z7/capy-placeholder-logo.png'">
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Banner Ajustado -->
+    <!-- Hero Banner -->
     <header class="hero-banner">
-        <!-- Imagen de fondo -->
         <img src="presentacion.jpg" alt="Presentación Capy" class="hero-bg-img" onerror="this.src='https://i.ibb.co/hVpZ9hP/banner-placeholder.jpg'">
-        
-        <!-- Botón dentro del contenedor con margen inferior seguro -->
-        <a href="https://wa.me/584242510523" 
+        <a href="https://wa.me/584242510523?text=Buenas%20noches!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" 
            target="_blank" 
            class="cta-btn hero-bottom-cta">
             ¡Haz crecer tu negocio!
@@ -381,28 +333,56 @@
 
     <div class="py-8"></div>
 
-    <!-- Secciones de Valores -->
+    <!-- Valores con Interactividad -->
     <section class="container mx-auto px-6 py-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="value-card">
-                <i class="fas fa-cog"></i>
-                <h3>Funcionalidad</h3>
-                <div class="main-label">Funcionalidad</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="value-card-container">
+                <div class="value-card-inner">
+                    <div class="value-card-front">
+                        <i class="fas fa-cog"></i>
+                        <h3>Funcionalidad</h3>
+                        <div class="main-label">Funcionalidad</div>
+                    </div>
+                    <div class="value-card-back">
+                        <p>Creamos identidades que no solo se ven bien, sino que trabajan para ti. Orientamos cada diseño para que sea útil y cumpla su objetivo comercial.</p>
+                    </div>
+                </div>
             </div>
-            <div class="value-card">
-                <i class="fas fa-paint-brush"></i>
-                <h3>Creatividad</h3>
-                <div class="main-label">Creatividad</div>
+            <div class="value-card-container">
+                <div class="value-card-inner">
+                    <div class="value-card-front">
+                        <i class="fas fa-paint-brush"></i>
+                        <h3>Creatividad</h3>
+                        <div class="main-label">Creatividad</div>
+                    </div>
+                    <div class="value-card-back">
+                        <p>A través de la Ilustración y el Diseño Gráfico, transformamos ideas abstractas en recursos visuales únicos que destacan en el mercado venezolano.</p>
+                    </div>
+                </div>
             </div>
-            <div class="value-card">
-                <i class="fas fa-comment"></i>
-                <h3>Expresión</h3>
-                <div class="main-label">Expresión</div>
+            <div class="value-card-container">
+                <div class="value-card-inner">
+                    <div class="value-card-front">
+                        <i class="fas fa-comment"></i>
+                        <h3>Expresión</h3>
+                        <div class="main-label">Expresión</div>
+                    </div>
+                    <div class="value-card-back">
+                        <p>Con nuestros servicios de Locución y Narración, le damos voz a tu marca, transmitiendo emociones y conectando profundamente con tu audiencia.</p>
+                    </div>
+                </div>
             </div>
-            <div class="value-card">
-                <i class="fas fa-users"></i>
-                <h3>Comunicación</h3>
-                <div class="main-label">Comunicación</div>
+            <div class="value-card-container">
+                <div class="value-card-inner">
+                    <div class="value-card-front">
+                        <i class="fas fa-users"></i>
+                        <h3>Comunicación</h3>
+                        <div class="main-label">Comunicación</div>
+                    </div>
+                    <div class="value-card-back">
+                        <p>Gestionamos tu presencia digital como Community Managers, asegurando que el mensaje de tu negocio llegue de forma clara y efectiva.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -422,35 +402,35 @@
                     <div class="book-content-overlay">
                         <div class="book-page">
                             <h4>MISIÓN</h4>
-                            <p>Darle acceso al público venezolano a un servicio creativo de calidad y funcional, que cumpla con las expectativas y su función dando una correcta orientación a los consumidores para el uso de dichos elementos.</p>
+                            <p>Darle acceso al público venezolano a un servicio creativo de calidad y funcional, que cumpla con las expectativas y su función.</p>
                         </div>
                         <div class="book-page">
                             <h4>VISIÓN</h4>
-                            <p>Se busca desarrollar una empresa capaz de alcanzar la sostenibilidad, ofreciendo algo realmente funcional a los consumidores de sus servicios, permitiendo la expansión del estudio por todo el territorio nacional.</p>
+                            <p>Desarrollar una empresa capaz de alcanzar la sostenibilidad y expansión por todo el territorio nacional.</p>
                         </div>
                     </div>
-                    <img src="plumon.png" alt="Plumón" class="pen-overlay" onerror="this.src='https://i.ibb.co/3Y8M4tW/pen-placeholder.png'">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Que Hacemos -->
+    <!-- Sección Que Hacemos Dinámica -->
     <section id="hacemos" class="py-20">
         <div class="container mx-auto px-6">
             <div class="pill-tag mb-12">Que hacemos</div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                 <div class="blob-shape">
-                    <ul class="text-3xl font-black space-y-6">
-                        <li>DISEÑO GRÁFICO</li>
-                        <li>ILUSTRACIÓN</li>
-                        <li>COMMUNITY MANAGER</li>
-                        <li>NARRACIÓN</li>
-                        <li>LOCUCIÓN</li>
+                    <ul class="text-2xl md:text-3xl font-black space-y-4 md:space-y-6">
+                        <li class="service-item" onmouseover="updateDef('DISEÑO GRÁFICO', 'La base visual de tu negocio. Creamos logotipos, manuales de marca y piezas publicitarias que comunican profesionalismo y confianza.')">DISEÑO GRÁFICO</li>
+                        <li class="service-item" onmouseover="updateDef('ILUSTRACIÓN', 'Arte personalizado para dar un toque único. Desde mascotas de marca hasta contenido editorial que ninguna otra empresa podrá replicar.')">ILUSTRACIÓN</li>
+                        <li class="service-item" onmouseover="updateDef('COMMUNITY MANAGER', 'No solo publicamos, conectamos. Estrategia de contenidos y gestión de redes para que tu comunidad crezca y se convierta en clientes.')">COMMUNITY MANAGER</li>
+                        <li class="service-item" onmouseover="updateDef('NARRACIÓN', 'Historias que cobran vida. Servicio especializado para audiolibros, videos explicativos o presentaciones que necesitan impacto narrativo.')">NARRACIÓN</li>
+                        <li class="service-item" onmouseover="updateDef('LOCUCIÓN', 'La voz profesional para tus anuncios. Calidad de estudio para radio, televisión y plataformas digitales que proyecta elegancia y cercanía.')">LOCUCIÓN</li>
                     </ul>
                 </div>
-                <div class="definition-box">
-                    <h2>DEFINICIÓN</h2>
+                <div class="definition-box" id="definition-display">
+                    <h2 id="def-title">DEFINICIÓN</h2>
+                    <p id="def-text">Pasa el mouse sobre uno de nuestros servicios para conocer cómo podemos transformar tu negocio con nuestra experiencia creativa.</p>
                 </div>
             </div>
         </div>
@@ -465,9 +445,9 @@
                     <img src="foto-perfil-1.jpg" alt="Shair Aponte" onerror="this.src='https://i.pravatar.cc/400?u=shairaponte'">
                 </div>
                 <div class="profile-info">
-                    <h4>SHAIR APONTE</h4>
-                    <p>DISEÑADOR GRÁFICO</p>
-                    <a href="https://www.instagram.com/shair_aponte_art" target="_blank" class="btn-ver-mas">
+                    <h4 class="font-bold text-xl mb-1">SHAIR APONTE</h4>
+                    <p class="text-sm opacity-80 mb-4">DISEÑADOR GRÁFICO</p>
+                    <a href="https://www.instagram.com/shair_aponte_art" target="_blank" class="inline-block bg-white text-[#3e2723] px-6 py-2 rounded-xl font-bold hover:bg-[#f4e8d1] transition-all">
                         <i class="fab fa-instagram"></i> VER MÁS
                     </a>
                 </div>
@@ -477,9 +457,9 @@
                     <img src="foto-perfil-2.jpg" alt="Arley Velasquez" onerror="this.src='https://i.pravatar.cc/400?u=arleyvelasquez'">
                 </div>
                 <div class="profile-info">
-                    <h4>ARLEY VELASQUEZ</h4>
-                    <p>NARRADOR Y LOCUTOR</p>
-                    <a href="https://www.instagram.com/arley_vlz" target="_blank" class="btn-ver-mas">
+                    <h4 class="font-bold text-xl mb-1">ARLEY VELASQUEZ</h4>
+                    <p class="text-sm opacity-80 mb-4">NARRADOR Y LOCUTOR</p>
+                    <a href="https://www.instagram.com/arley_vlz" target="_blank" class="inline-block bg-white text-[#3e2723] px-6 py-2 rounded-xl font-bold hover:bg-[#f4e8d1] transition-all">
                         <i class="fab fa-instagram"></i> VER MÁS
                     </a>
                 </div>
@@ -493,9 +473,9 @@
         <div class="container mx-auto px-6 pt-10 text-white">
             <h3 class="text-center font-bold text-3xl mb-16 uppercase tracking-widest">Contáctanos</h3>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-end">
-                <div class="text-center mb-10 lg:mb-0">
+                <div class="text-center">
                     <a href="https://www.instagram.com/capy_studios_oficial" target="_blank">
-                        <div class="qr-box">
+                        <div class="bg-white p-4 rounded-[30px] inline-block">
                             <img src="qr-contacto.png" alt="QR" width="180" 
                                  onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.instagram.com/capy_studios_oficial'">
                         </div>
@@ -503,20 +483,20 @@
                     <p class="mt-4 font-bold text-sm">@CAPY_STUDIOS_OFICIAL</p>
                 </div>
 
-                <div class="flex flex-col items-center lg:items-start mb-10 lg:mb-0">
+                <div class="flex flex-col items-center lg:items-start">
                     <a href="https://www.tiktok.com/@capy_studios_oficial" target="_blank" class="social-button">
                         <i class="fab fa-tiktok"></i> Tik Tok
                     </a>
                     <a href="https://www.instagram.com/capy_studios_oficial" target="_blank" class="social-button">
                         <i class="fab fa-instagram"></i> Instagram
                     </a>
-                    <a href="https://wa.me/584242510523" target="_blank" class="social-button">
+                    <a href="https://wa.me/584242510523?text=Buenas%20noches!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" target="_blank" class="social-button">
                         <i class="fab fa-whatsapp"></i> Whatsapp
                     </a>
                 </div>
 
                 <div class="flex justify-center items-end">
-                    <img src="mascota-capy.png" alt="Mascota" class="mascot-large" onerror="this.style.display='none'">
+                    <img src="mascota-capy.png" alt="Mascota" class="w-full max-w-[450px] relative bottom-[-40px] drop-shadow-2xl" onerror="this.style.display='none'">
                 </div>
             </div>
             <div class="mt-20 border-t border-white/20 pt-8 text-center text-xs opacity-50">
@@ -524,6 +504,24 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function updateDef(title, text) {
+            const titleElement = document.getElementById('def-title');
+            const textElement = document.getElementById('def-text');
+            const box = document.getElementById('definition-display');
+
+            // Efecto de parpadeo suave al cambiar
+            box.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                titleElement.innerText = title;
+                textElement.innerText = text;
+                box.style.opacity = '1';
+                box.style.borderColor = 'var(--color-brown-light)';
+            }, 150);
+        }
+    </script>
 
 </body>
 </html>
