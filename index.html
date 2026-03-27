@@ -45,36 +45,49 @@
 
         /* Hero */
         .hero-banner {
-            background-image: url('hero-bg.jpg');
+            background-image: url('presentacion.jpg');
             background-size: cover;
             background-position: center;
-            height: 500px;
+            height: 600px;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Botón de Llamada a la Acción en Hero - Link Directo a WhatsApp */
-        .cta-hero-btn {
+        /* Botón de Llamada a la Acción */
+        .cta-btn {
             background-color: var(--color-brown-dark);
             color: white;
-            padding: 15px 35px;
+            padding: 12px 28px;
             border-radius: 50px;
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
             text-decoration: none;
             border: 2px solid white;
-            animation: pulse-animation 2s infinite;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
         }
 
-        .cta-hero-btn:hover {
+        .cta-btn:hover {
             transform: scale(1.05) translateY(-3px);
             background-color: var(--color-brown-mid);
             box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Botón específico del Hero ubicado en la base según Screenshot_5 */
+        .hero-bottom-cta {
+            position: absolute;
+            bottom: -28px; /* Ajuste para que quede mitad en hero, mitad en cuadrícula */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: pulse-animation 2s infinite;
         }
 
         @keyframes pulse-animation {
@@ -278,22 +291,22 @@
             top: 0;
             background: var(--color-brown-dark);
             z-index: 1000;
-            padding: 10px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            padding: 12px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
         .nav-pill {
             color: white;
-            padding: 8px 20px;
+            padding: 8px 16px;
             border-radius: 50px;
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             text-decoration: none;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
-        .nav-pill:hover { background: rgba(255,255,255,0.2); }
+        .nav-pill:hover { background: rgba(255,255,255,0.25); color: var(--color-cream); }
 
         .logo-home-btn {
             height: 50px;
@@ -301,20 +314,33 @@
             transition: transform 0.2s ease;
         }
         .logo-home-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Ajuste para móvil */
+        @media (max-width: 768px) {
+            .hero-banner { height: 400px; }
+            .nav-pill { font-size: 0.6rem; padding: 6px 12px; }
+            .hero-bottom-cta { bottom: -24px; font-size: 0.9rem; padding: 10px 20px; }
         }
     </style>
 </head>
 <body class="grid-pattern">
 
-    <!-- Navegación con Logo en la esquina derecha -->
+    <!-- Navegación -->
     <nav>
-        <div class="container mx-auto px-6 flex items-center justify-between">
-            <!-- Espaciador a la izquierda para mantener los botones centrados -->
-            <div class="hidden lg:block w-[100px]"></div>
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <!-- Botón en la esquina superior izquierda -->
+            <div class="flex-shrink-0">
+                <a href="https://wa.me/584242510523?text=Buenas%20noches!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" 
+                   target="_blank" 
+                   class="cta-btn text-xs px-4 py-2 border-1">
+                    ¡HAZ CRECER TU NEGOCIO!
+                </a>
+            </div>
 
             <!-- Botones Centrales -->
-            <div class="flex flex-wrap justify-center gap-3">
+            <div class="hidden md:flex flex-wrap justify-center gap-2">
                 <a href="#que-es" class="nav-pill">¿Qué es Capy?</a>
                 <a href="#hacemos" class="nav-pill">Que hacemos</a>
                 <a href="#somos" class="nav-pill">Quienes somos</a>
@@ -322,7 +348,7 @@
             </div>
 
             <!-- Logo en la esquina superior derecha -->
-            <div class="ml-4">
+            <div class="flex-shrink-0">
                 <a href="index.html">
                     <img src="Logo-home.png" alt="Capy Studios Logo" class="logo-home-btn" onerror="this.src='https://i.ibb.co/6YfQ1Z7/capy-placeholder-logo.png'">
                 </a>
@@ -330,17 +356,26 @@
         </div>
     </nav>
 
-    <!-- Hero Banner con Botón Central vinculado a WhatsApp -->
+    <!-- Hero Banner con Botón en la base según Screenshot_5 -->
     <header class="hero-banner">
+        <!-- Contenido central del hero (logo/títulos si fuesen necesarios) -->
+        <div class="text-center">
+            <!-- El fondo presentacion.jpg ya tiene el logo centrado según la imagen -->
+        </div>
+        
+        <!-- Botón ubicado en la transición hacia la cuadrícula -->
         <a href="https://wa.me/584242510523?text=Buenas%20noches!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" 
            target="_blank" 
-           class="cta-hero-btn">
+           class="cta-btn hero-bottom-cta">
             ¡Haz crecer tu negocio!
         </a>
     </header>
 
+    <!-- Sección de Espaciado para la cuadrícula -->
+    <div class="py-12"></div>
+
     <!-- Valores -->
-    <section class="container mx-auto px-6 py-20">
+    <section class="container mx-auto px-6 py-10">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="value-card">
                 <i class="fas fa-cog"></i>
