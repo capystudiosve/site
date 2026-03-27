@@ -100,7 +100,7 @@
             100% { box-shadow: 0 0 0 0 rgba(62, 39, 35, 0); }
         }
 
-        /* --- TARJETAS INTERACTIVAS (FLIP CARDS) --- */
+        /* --- TARJETAS INTERACTIVAS --- */
         .value-card-container {
             perspective: 1000px;
             height: 350px;
@@ -145,7 +145,7 @@
         .value-card-front i { font-size: 4rem; margin-bottom: 1rem; color: var(--color-brown-dark); }
         .value-card-front .main-label { font-weight: 800; text-transform: uppercase; font-size: 1.2rem; color: var(--color-brown-dark); }
 
-        /* --- LIBRO 3D EN CSS --- */
+        /* --- LIBRO 3D --- */
         .book-container {
             perspective: 1500px;
             width: var(--book-width);
@@ -165,7 +165,6 @@
             transform: rotateY(-30deg) translateX(50px);
         }
 
-        /* Portada */
         .book-cover {
             width: 100%;
             height: 100%;
@@ -199,7 +198,6 @@
             margin: 10px;
         }
 
-        /* Páginas Interiores */
         .book-pages {
             width: 95%;
             height: 95%;
@@ -311,20 +309,27 @@
         }
         .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Footer */
-        .footer-section { background-color: var(--color-brown-dark); margin-top: 100px; position: relative; padding-bottom: 40px; }
+        /* Footer Optimizado */
+        .footer-section { 
+            background-color: var(--color-brown-dark); 
+            margin-top: 40px;
+            position: relative; 
+            padding-bottom: 0px; 
+            overflow: hidden;
+        }
         .footer-curve {
-            position: absolute; top: -60px; left: 0; width: 100%; height: 100px;
+            position: absolute; top: -30px; left: 0; width: 100%; height: 60px;
             background-color: var(--color-brown-dark); border-radius: 50% 50% 0 0 / 100% 100% 0 0;
         }
         .social-button {
             background-color: var(--color-cream); color: var(--color-brown-dark);
-            padding: 15px 25px; border-radius: 15px; font-weight: 800;
-            display: flex; align-items: center; gap: 15px; width: 100%;
-            max-width: 350px; font-size: 1.3rem; text-transform: uppercase;
-            margin-bottom: 15px; text-decoration: none; transition: 0.2s;
+            padding: 12px 20px; border-radius: 12px; font-weight: 800;
+            display: flex; align-items: center; gap: 12px; width: 100%;
+            max-width: 280px; font-size: 1.1rem; text-transform: uppercase;
+            margin-bottom: 10px; text-decoration: none; transition: 0.2s;
+            box-shadow: 0 4px 0px rgba(0,0,0,0.2);
         }
-        .social-button:hover { transform: scale(1.05); background-color: #fff; }
+        .social-button:hover { transform: translateY(-3px); background-color: #fff; }
 
         nav {
             position: sticky; top: 0; background: var(--color-brown-dark);
@@ -340,9 +345,9 @@
         @media (max-width: 768px) {
             .hero-banner { height: 400px; }
             .nav-pill { font-size: 0.6rem; padding: 6px 12px; }
-            .blob-shape { padding: 2rem; min-height: auto; }
-            .definition-box { min-height: 250px; margin-top: 2rem; }
             .book-container { transform: scale(0.8); }
+            .footer-section { margin-top: 20px; }
+            .footer-curve { top: -20px; height: 40px; }
         }
     </style>
 </head>
@@ -352,7 +357,7 @@
     <nav>
         <div class="container mx-auto px-4 flex items-center justify-between">
             <div class="flex-shrink-0">
-                <a href="https://wa.me/584242510523" target="_blank" class="cta-btn text-xs px-4 py-2 border-1"> ¡HAZ CRECER TU NEGOCIO! </a>
+                <a href="https://wa.me/584242510523?text=Buenas!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" target="_blank" class="cta-btn text-xs px-4 py-2 border-1"> ¡HAZ CRECER TU NEGOCIO! </a>
             </div>
             <div class="hidden md:flex flex-wrap justify-center gap-2">
                 <a href="#que-es" class="nav-pill">¿Qué es Capy?</a>
@@ -371,12 +376,12 @@
     <!-- Hero Banner -->
     <header class="hero-banner">
         <img src="presentacion.jpg" alt="Presentación Capy" class="hero-bg-img" onerror="this.src='https://i.ibb.co/hVpZ9hP/banner-placeholder.jpg'">
-        <a href="https://wa.me/584242510523" target="_blank" class="cta-btn hero-bottom-cta"> ¡Haz crecer tu negocio! </a>
+        <a href="https://wa.me/584242510523?text=Buenas!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" target="_blank" class="cta-btn hero-bottom-cta"> ¡Haz crecer tu negocio! </a>
     </header>
 
     <div class="py-8"></div>
 
-    <!-- Valores con Interactividad -->
+    <!-- Valores -->
     <section class="container mx-auto px-6 py-10">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="value-card-container">
@@ -390,7 +395,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Otros valores (omitidos por brevedad para centrar el cambio) -->
             <div class="value-card-container">
                 <div class="value-card-inner">
                     <div class="value-card-front">
@@ -427,7 +431,7 @@
         </div>
     </section>
 
-    <!-- Sección ¿Qué es Capy? Con LIBRO 3D CSS -->
+    <!-- Sección ¿Qué es Capy? -->
     <section id="que-es" class="container mx-auto px-6 py-12">
         <div class="text-center mb-16">
             <div class="pill-tag">¿Qué es Capy?</div>
@@ -439,18 +443,16 @@
             <div class="flex justify-center">
                 <div class="book-container">
                     <div class="book">
-                        <!-- Portada -->
                         <div class="book-cover">
-                            <img src="Logo-home.png" alt="Logo" class="w-20 mb-4 opacity-80" onerror="this.style.display='none'">
+                            <img src="Logo-home.png" alt="Logo" class="w-16 mb-4 opacity-80" onerror="this.style.display='none'">
                             <h2>CAPY<br>STUDIOS</h2>
                             <p class="text-xs uppercase tracking-widest mt-4">Manual de Marca</p>
                         </div>
-                        <!-- Página interior -->
                         <div class="book-pages">
                             <div class="inner-page">
                                 <h4>MISIÓN</h4>
                                 <p>Darle acceso al público venezolano a un servicio creativo de calidad y funcional, que cumpla con las expectativas y su función.</p>
-                                <div class="mt-8">
+                                <div class="mt-6">
                                     <h4>VISIÓN</h4>
                                     <p>Desarrollar una empresa capaz de alcanzar la sostenibilidad y expansión por todo el territorio nacional.</p>
                                 </div>
@@ -463,7 +465,7 @@
     </section>
 
     <!-- Sección Que Hacemos -->
-    <section id="hacemos" class="py-20">
+    <section id="hacemos" class="py-12 md:py-20">
         <div class="container mx-auto px-6">
             <div class="pill-tag mb-12">Que hacemos</div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
@@ -485,9 +487,9 @@
     </section>
 
     <!-- Sección Quienes Somos -->
-    <section id="somos" class="container mx-auto px-6 py-20 text-center">
-        <div class="pill-tag mb-20">Quienes somos</div>
-        <div class="flex flex-wrap justify-center gap-12">
+    <section id="somos" class="container mx-auto px-6 py-12 md:py-20 text-center">
+        <div class="pill-tag mb-16">Quienes somos</div>
+        <div class="flex flex-wrap justify-center gap-8 md:gap-12">
             <div class="profile-container">
                 <div class="profile-photo">
                     <img src="foto-perfil-1.jpg" alt="Shair Aponte" onerror="this.src='https://i.pravatar.cc/400?u=shairaponte'">
@@ -511,35 +513,60 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer Final Optimizado -->
     <footer id="contacto" class="footer-section">
         <div class="footer-curve"></div>
         <div class="container mx-auto px-6 pt-10 text-white">
-            <h3 class="text-center font-bold text-3xl mb-16 uppercase tracking-widest">Contáctanos</h3>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-end">
-                <div class="text-center">
-                    <div class="bg-white p-4 rounded-[30px] inline-block">
-                        <img src="qr-contacto.png" alt="QR" width="180" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.instagram.com/capy_studios_oficial'">
+            <h3 class="text-center font-bold text-2xl md:text-3xl mb-8 uppercase tracking-widest">Contáctanos</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
+                <!-- Columna QR -->
+                <div class="flex flex-col items-center">
+                    <div class="bg-white p-3 rounded-[20px] inline-block shadow-2xl">
+                        <img src="qr-contacto.png" alt="QR Contacto" width="130" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https://www.instagram.com/capy_studios_oficial'">
                     </div>
-                    <p class="mt-4 font-bold text-sm">@CAPY_STUDIOS_OFICIAL</p>
+                    <p class="mt-3 font-bold text-[10px] opacity-70 tracking-widest">@CAPY_STUDIOS_OFICIAL</p>
                 </div>
-                <div class="flex flex-col items-center lg:items-start">
-                    <a href="https://www.tiktok.com/@capy_studios_oficial" target="_blank" class="social-button"> <i class="fab fa-tiktok"></i> Tik Tok </a>
-                    <a href="https://www.instagram.com/capy_studios_oficial" target="_blank" class="social-button"> <i class="fab fa-instagram"></i> Instagram </a>
-                    <a href="https://wa.me/584242510523" target="_blank" class="social-button"> <i class="fab fa-whatsapp"></i> Whatsapp </a>
+
+                <!-- Columna Redes Sociales -->
+                <div class="flex flex-col items-center justify-center space-y-3">
+                    <a href="https://www.tiktok.com/@capy_studios_oficial" target="_blank" class="social-button"> 
+                        <i class="fab fa-tiktok"></i> Tik Tok 
+                    </a>
+                    <a href="https://www.instagram.com/capy_studios_oficial" target="_blank" class="social-button"> 
+                        <i class="fab fa-instagram"></i> Instagram 
+                    </a>
+                    <a href="https://wa.me/584242510523?text=Buenas!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" target="_blank" class="social-button"> 
+                        <i class="fab fa-whatsapp"></i> Whatsapp 
+                    </a>
                 </div>
-                <div class="flex justify-center items-end">
-                    <img src="mascota-capy.png" alt="Mascota" class="w-full max-w-[450px] relative bottom-[-40px] drop-shadow-2xl" onerror="this.style.display='none'">
+
+                <!-- Columna Mascota (Solo Escritorio) -->
+                <div class="hidden lg:flex justify-center items-end self-end">
+                    <img src="mascota-capy.png" alt="Mascota Capy" class="max-h-[260px] w-auto drop-shadow-2xl translate-y-4 hover:scale-105 transition-transform" onerror="this.style.display='none'">
                 </div>
             </div>
-            <div class="mt-20 border-t border-white/20 pt-8 text-center text-xs opacity-50"> © 2024 CAPY STUDIOS. TODO EL TERRITORIO NACIONAL. </div>
+
+            <!-- Mascota (Móvil) -->
+            <div class="lg:hidden flex justify-center mt-4">
+                <img src="mascota-capy.png" alt="Mascota Capy Móvil" class="max-h-[180px] w-auto drop-shadow-2xl translate-y-2" onerror="this.style.display='none'">
+            </div>
+
+            <div class="mt-8 border-t border-white/10 py-6 text-center text-[9px] opacity-40 uppercase tracking-[0.2em]"> 
+                © 2024 CAPY STUDIOS. TODO EL TERRITORIO NACIONAL. 
+            </div>
         </div>
     </footer>
 
     <script>
         function updateDef(title, text) {
-            document.getElementById('def-title').innerText = title;
-            document.getElementById('def-text').innerText = text;
+            const display = document.getElementById('definition-display');
+            display.style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('def-title').innerText = title;
+                document.getElementById('def-text').innerText = text;
+                display.style.opacity = '1';
+            }, 150);
         }
     </script>
 </body>
