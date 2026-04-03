@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-    
     <link rel="icon" type="image/png" href="Logo-home.png">
 
     <style>
@@ -16,8 +15,6 @@
             --color-brown-dark: #3e2723;
             --color-brown-mid: #5d4037;
             --color-brown-light: #8d6e63;
-            --book-width: 300px;
-            --book-height: 400px;
         }
 
         body {
@@ -100,255 +97,133 @@
             100% { box-shadow: 0 0 0 0 rgba(62, 39, 35, 0); }
         }
 
-        /* --- TARJETAS INTERACTIVAS --- */
-        .value-card-container {
-            perspective: 1000px;
-            height: 350px;
-        }
-
-        .value-card-inner {
+        /* --- PERFILES CON PORTAFOLIO DESPLEGABLE --- */
+        .profile-card {
             position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
-
-        .value-card-container:hover .value-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .value-card-front, .value-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border: 4px solid var(--color-brown-dark);
-            border-radius: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .value-card-front { background-color: transparent; }
-        .value-card-back {
+            width: 320px;
+            height: 480px;
             background-color: var(--color-brown-dark);
+            border-radius: 30px;
             color: white;
-            transform: rotateY(180deg);
-        }
-
-        .value-card-front i { font-size: 4rem; margin-bottom: 1rem; color: var(--color-brown-dark); }
-        .value-card-front .main-label { font-weight: 800; text-transform: uppercase; font-size: 1.2rem; color: var(--color-brown-dark); }
-
-        /* --- LIBRO 3D --- */
-        .book-container {
-            perspective: 1500px;
-            width: var(--book-width);
-            height: var(--book-height);
-            position: relative;
-        }
-
-        .book {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
-
-        .book-container:hover .book {
-            transform: rotateY(-30deg) translateX(50px);
-        }
-
-        .book-cover {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            z-index: 10;
-            transform-origin: left;
-            transition: transform 0.8s ease;
-            transform-style: preserve-3d;
-            cursor: pointer;
-            background-color: var(--color-brown-dark);
-            border-radius: 4px 15px 15px 4px;
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            border-left: 5px solid rgba(0,0,0,0.2);
-        }
-
-        .book-container:hover .book-cover {
-            transform: rotateY(-160deg);
-        }
-
-        .book-cover h2 {
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-align: center;
-            padding: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            margin: 10px;
-        }
-
-        .book-pages {
-            width: 95%;
-            height: 95%;
-            position: absolute;
-            top: 2.5%;
-            left: 2.5%;
-            z-index: 5;
-            background: #fff;
-            box-shadow: inset 3px 0 10px rgba(0,0,0,0.1);
-            display: flex;
-            border-radius: 2px 10px 10px 2px;
             overflow: hidden;
-        }
-
-        .inner-page {
-            width: 100%;
-            height: 100%;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background-image: linear-gradient(90deg, #f9f9f9 0%, #fff 10%, #fff 90%, #f9f9f9 100%);
-        }
-
-        .inner-page h4 {
-            font-weight: 800;
-            color: var(--color-brown-dark);
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--color-brown-dark);
-            text-transform: uppercase;
-        }
-
-        .inner-page p {
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: #444;
-            font-weight: 600;
-        }
-
-        /* Texto Dinámico */
-        .dynamic-text span {
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        .dynamic-text span:hover {
-            color: var(--color-brown-light);
-            transform: translateY(-5px);
-            cursor: default;
-        }
-
-        /* Secciones */
-        .blob-shape {
-            background-color: var(--color-brown-dark);
-            color: white; border-radius: 0 100px 100px 100px;
-            padding: 3rem; min-height: 400px;
-            display: flex; flex-direction: column; justify-content: center;
-            box-shadow: 15px 15px 0px rgba(93, 64, 55, 0.3);
-        }
-
-        .definition-box {
-            border: 4px solid var(--color-brown-dark);
-            background: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
-            padding: 2rem;
-            text-align: center;
-            border-radius: 40px;
-        }
-        
-        #def-title {
-            font-size: 2.5rem;
-            color: var(--color-brown-dark);
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        #def-text {
-            font-size: 1.2rem;
-            color: var(--color-brown-mid);
-            line-height: 1.6;
-            font-weight: 500;
-        }
-
-        .service-item {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             cursor: pointer;
-            transition: transform 0.2s ease, color 0.2s ease;
         }
 
-        .service-item:hover {
-            transform: translateX(20px);
-            color: #f3e5ab;
+        .profile-content {
+            padding: 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.4s ease;
         }
 
-        /* Perfiles */
-        .profile-container {
-            background-color: var(--color-brown-dark);
-            border-radius: 40px; padding: 30px; width: 320px;
-            color: white; text-align: center;
-        }
         .profile-photo {
-            background: white; border-radius: 20px; margin-bottom: 20px;
-            overflow: hidden; height: 250px; border: 3px solid rgba(255,255,255,0.1);
+            width: 220px;
+            height: 220px;
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.1);
         }
+
         .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Footer Optimizado */
-        .footer-section { 
-            background-color: var(--color-brown-dark); 
-            margin-top: 40px;
-            position: relative; 
-            padding-bottom: 0px; 
+        /* Panel lateral de trabajos */
+        .portfolio-drawer {
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(62, 39, 35, 0.98);
+            backdrop-filter: blur(10px);
+            transition: right 0.4s ease;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .profile-card:hover .portfolio-drawer,
+        .profile-card:active .portfolio-drawer {
+            right: 0;
+        }
+
+        .profile-card:hover .profile-content {
+            transform: scale(0.9);
+            opacity: 0.3;
+        }
+
+        /* Estilos de Audio y Video en Drawer */
+        .work-title {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            color: var(--color-cream);
+            display: block;
+        }
+
+        audio {
+            width: 100%;
+            height: 35px;
+            margin-bottom: 15px;
+            filter: sepia(20%) brightness(90%) contrast(110%);
+        }
+
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 12px;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 15px;
         }
-        .footer-curve {
-            position: absolute; top: -30px; left: 0; width: 100%; height: 60px;
-            background-color: var(--color-brown-dark); border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
+
+        .drawer-hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            color: var(--color-brown-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            animation: bounce-x 1.5s infinite;
+        }
+
+        @keyframes bounce-x {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-5px); }
+        }
+
+        /* Resto de la estructura */
+        .footer-section { background-color: var(--color-brown-dark); position: relative; padding-bottom: 20px; }
+        .footer-curve { position: absolute; top: -30px; left: 0; width: 100%; height: 60px; background-color: var(--color-brown-dark); border-radius: 50% 50% 0 0; }
+        
         .social-button {
             background-color: var(--color-cream); color: var(--color-brown-dark);
             padding: 12px 20px; border-radius: 12px; font-weight: 800;
             display: flex; align-items: center; gap: 12px; width: 100%;
-            max-width: 280px; font-size: 1.1rem; text-transform: uppercase;
-            margin-bottom: 10px; text-decoration: none; transition: 0.2s;
-            box-shadow: 0 4px 0px rgba(0,0,0,0.2);
-        }
-        .social-button:hover { transform: translateY(-3px); background-color: #fff; }
-
-        nav {
-            position: sticky; top: 0; background: var(--color-brown-dark);
-            z-index: 1000; padding: 12px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-        }
-        .nav-pill {
-            color: white; padding: 8px 16px; border-radius: 50px;
-            font-weight: 700; text-transform: uppercase; font-size: 0.75rem;
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            text-decoration: none;
+            max-width: 280px; text-decoration: none; transition: 0.2s;
         }
 
-        @media (max-width: 768px) {
-            .hero-banner { height: 400px; }
-            .nav-pill { font-size: 0.6rem; padding: 6px 12px; }
-            .book-container { transform: scale(0.8); }
-            .footer-section { margin-top: 20px; }
-            .footer-curve { top: -20px; height: 40px; }
-        }
+        nav { position: sticky; top: 0; background: var(--color-brown-dark); z-index: 1000; padding: 12px 0; }
+        .nav-pill { color: white; padding: 8px 16px; border-radius: 50px; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); text-decoration: none; }
     </style>
 </head>
 <body class="grid-pattern">
@@ -357,18 +232,16 @@
     <nav>
         <div class="container mx-auto px-4 flex items-center justify-between">
             <div class="flex-shrink-0">
-                <a href="https://wa.me/584242510523?text=Buenas!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" target="_blank" class="cta-btn text-xs px-4 py-2 border-1"> ¡HAZ CRECER TU NEGOCIO! </a>
+                <a href="https://wa.me/584242510523?text=Buenas!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" target="_blank" class="cta-btn text-[10px] px-4 py-2"> ¡HAZ CRECER TU NEGOCIO! </a>
             </div>
-            <div class="hidden md:flex flex-wrap justify-center gap-2">
+            <div class="hidden md:flex gap-2">
                 <a href="#que-es" class="nav-pill">¿Qué es Capy?</a>
                 <a href="#hacemos" class="nav-pill">Que hacemos</a>
                 <a href="#somos" class="nav-pill">Quienes somos</a>
                 <a href="#contacto" class="nav-pill">Contactos</a>
             </div>
             <div class="flex-shrink-0">
-                <a href="#">
-                    <img src="Logo-home.png" alt="Capy Studios Logo" class="h-[50px] w-auto transition-transform hover:scale-110 hover:rotate-6" onerror="this.src='https://i.ibb.co/6YfQ1Z7/capy-placeholder-logo.png'">
-                </a>
+                <img src="Logo-home.png" alt="Capy Logo" class="h-[50px]" onerror="this.src='https://i.ibb.co/6YfQ1Z7/capy-placeholder-logo.png'">
             </div>
         </div>
     </nav>
@@ -379,195 +252,118 @@
         <a href="https://wa.me/584242510523?text=Buenas!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" target="_blank" class="cta-btn hero-bottom-cta"> ¡Haz crecer tu negocio! </a>
     </header>
 
-    <div class="py-8"></div>
-
-    <!-- Valores -->
-    <section class="container mx-auto px-6 py-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="value-card-container">
-                <div class="value-card-inner">
-                    <div class="value-card-front">
-                        <i class="fas fa-cog"></i>
-                        <div class="main-label">Funcionalidad</div>
-                    </div>
-                    <div class="value-card-back">
-                        <p>Creamos identidades que no solo se ven bien, sino que trabajan para ti. Orientamos cada diseño para que sea útil y cumpla su objetivo comercial.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="value-card-container">
-                <div class="value-card-inner">
-                    <div class="value-card-front">
-                        <i class="fas fa-paint-brush"></i>
-                        <div class="main-label">Creatividad</div>
-                    </div>
-                    <div class="value-card-back">
-                        <p>A través de la Ilustración y el Diseño Gráfico, transformamos ideas abstractas en recursos visuales únicos que destacan en el mercado venezolano.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="value-card-container">
-                <div class="value-card-inner">
-                    <div class="value-card-front">
-                        <i class="fas fa-comment"></i>
-                        <div class="main-label">Expresión</div>
-                    </div>
-                    <div class="value-card-back">
-                        <p>Con nuestros servicios de Locución y Narración, le damos voz a tu marca, transmitiendo emociones y conectando profundamente con tu audiencia.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="value-card-container">
-                <div class="value-card-inner">
-                    <div class="value-card-front">
-                        <i class="fas fa-users"></i>
-                        <div class="main-label">Comunicación</div>
-                    </div>
-                    <div class="value-card-back">
-                        <p>Gestionamos tu presencia digital como Community Managers, asegurando que el mensaje de tu negocio llegue de forma clara y efectiva.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección ¿Qué es Capy? -->
-    <section id="que-es" class="container mx-auto px-6 py-12">
-        <div class="text-center mb-16">
-            <div class="pill-tag">¿Qué es Capy?</div>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <p class="text-3xl font-bold leading-tight text-left dynamic-text">
-                <span>Es</span> <span>un</span> <span>estudio</span> <span>creativo,</span> <span>que</span> <span>busca</span> <span>brindar</span> <span>los</span> <span>recursos</span> <span>y</span> <span>elementos</span> <span>que</span> <span>se</span> <span>necesitan</span> <span>para</span> <span>mejorar,</span> <span>actualizar,</span> <span>o</span> <span>crear</span> <span>la</span> <span>identidad</span> <span>de</span> <span>cualquier</span> <span>negocio</span> <span>o</span> <span>de</span> <span>uso</span> <span>personal.</span>
-            </p>
-            <div class="flex justify-center">
-                <div class="book-container">
-                    <div class="book">
-                        <div class="book-cover">
-                            <img src="Logo-home.png" alt="Logo" class="w-16 mb-4 opacity-80" onerror="this.style.display='none'">
-                            <h2>CAPY<br>STUDIOS</h2>
-                            <p class="text-xs uppercase tracking-widest mt-4">Manual de Marca</p>
-                        </div>
-                        <div class="book-pages">
-                            <div class="inner-page">
-                                <h4>MISIÓN</h4>
-                                <p>Darle acceso al público venezolano a un servicio creativo de calidad y funcional, que cumpla con las expectativas y su función.</p>
-                                <div class="mt-6">
-                                    <h4>VISIÓN</h4>
-                                    <p>Desarrollar una empresa capaz de alcanzar la sostenibilidad y expansión por todo el territorio nacional.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Que Hacemos -->
-    <section id="hacemos" class="py-12 md:py-20">
-        <div class="container mx-auto px-6">
-            <div class="pill-tag mb-12">Que hacemos</div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-                <div class="blob-shape">
-                    <ul class="text-2xl md:text-3xl font-black space-y-4 md:space-y-6">
-                        <li class="service-item" onmouseover="updateDef('DISEÑO GRÁFICO', 'La base visual de tu negocio. Creamos logotipos, manuales de marca y piezas publicitarias que comunican profesionalismo.')">DISEÑO GRÁFICO</li>
-                        <li class="service-item" onmouseover="updateDef('ILUSTRACIÓN', 'Arte personalizado para dar un toque único. Desde mascotas de marca hasta contenido editorial único.')">ILUSTRACIÓN</li>
-                        <li class="service-item" onmouseover="updateDef('COMMUNITY MANAGER', 'No solo publicamos, conectamos. Estrategia de contenidos para que tu comunidad crezca.')">COMMUNITY MANAGER</li>
-                        <li class="service-item" onmouseover="updateDef('NARRACIÓN', 'Historias que cobran vida. Servicio especializado para audiolibros o videos explicativos con impacto.')">NARRACIÓN</li>
-                        <li class="service-item" onmouseover="updateDef('LOCUCIÓN', 'La voz profesional para tus anuncios. Calidad de estudio para proyectar elegancia y cercanía.')">LOCUCIÓN</li>
-                    </ul>
-                </div>
-                <div class="definition-box" id="definition-display">
-                    <h2 id="def-title">DEFINICIÓN</h2>
-                    <p id="def-text">Pasa el mouse sobre uno de nuestros servicios para conocer cómo podemos transformar tu negocio.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Quienes Somos -->
-    <section id="somos" class="container mx-auto px-6 py-12 md:py-20 text-center">
+    <!-- Sección Quienes Somos con Portafolio -->
+    <section id="somos" class="container mx-auto px-6 py-20 text-center">
         <div class="pill-tag mb-16">Quienes somos</div>
-        <div class="flex flex-wrap justify-center gap-8 md:gap-12">
-            <div class="profile-container">
-                <div class="profile-photo">
-                    <img src="foto-perfil-1.jpg" alt="Shair Aponte" onerror="this.src='https://i.pravatar.cc/400?u=shairaponte'">
-                </div>
-                <div class="profile-info">
+        <p class="mb-12 font-bold text-lg opacity-70">Pasa el mouse o toca las tarjetas para ver nuestros trabajos destacados</p>
+        
+        <div class="flex flex-wrap justify-center gap-10">
+            
+            <!-- Perfil Shair Aponte (Diseño/Video Local) -->
+            <div class="profile-card">
+                <div class="profile-content">
+                    <div class="profile-photo">
+                        <img src="foto-perfil-1.jpg" alt="Shair Aponte" onerror="this.src='https://i.pravatar.cc/400?u=shairaponte'">
+                    </div>
                     <h4 class="font-bold text-xl mb-1">SHAIR APONTE</h4>
-                    <p class="text-sm opacity-80 mb-4">DISEÑADOR GRÁFICO</p>
-                    <a href="https://www.instagram.com/shair_aponte_art" target="_blank" class="inline-block bg-white text-[#3e2723] px-6 py-2 rounded-xl font-bold hover:bg-[#f4e8d1] transition-all"> <i class="fab fa-instagram"></i> VER MÁS </a>
+                    <p class="text-sm opacity-60 mb-6 uppercase tracking-widest">DISEÑADOR GRÁFICO</p>
+                    <div class="flex gap-4">
+                        <i class="fas fa-palette text-2xl"></i>
+                        <i class="fas fa-pencil-alt text-2xl"></i>
+                        <i class="fas fa-video text-2xl"></i>
+                    </div>
                 </div>
+                <!-- Menú Lateral Shair -->
+                <div class="portfolio-drawer text-left">
+                    <h3 class="font-black text-xl mb-6 text-white uppercase italic">Showreel Diseño</h3>
+                    <span class="work-title">Video de Trabajos</span>
+                    <div class="video-container">
+                        <video controls muted loop poster="foto-perfil-1.jpg">
+                            <source src="video-shair.mp4" type="video/mp4">
+                            Tu navegador no soporta el video.
+                        </video>
+                    </div>
+                    <p class="text-[10px] leading-relaxed opacity-80 mb-6 font-bold">Portafolio visual: Identidad corporativa, Ilustración digital y Motion Graphics realizados localmente.</p>
+                    <a href="https://www.instagram.com/shair_aponte_art" target="_blank" class="bg-white text-[#3e2723] text-center py-3 rounded-xl font-bold text-xs">VISITAR INSTAGRAM</a>
+                </div>
+                <div class="drawer-hint">VER TRABAJOS <i class="fas fa-arrow-right"></i></div>
             </div>
-            <div class="profile-container">
-                <div class="profile-photo">
-                    <img src="foto-perfil-2.jpg" alt="Arley Velasquez" onerror="this.src='https://i.pravatar.cc/400?u=arleyvelasquez'">
-                </div>
-                <div class="profile-info">
+
+            <!-- Perfil Arley Velasquez (Voz/Video y Audio) -->
+            <div class="profile-card">
+                <div class="profile-content">
+                    <div class="profile-photo">
+                        <img src="foto-perfil-2.jpg" alt="Arley Velasquez" onerror="this.src='https://i.pravatar.cc/400?u=arleyvelasquez'">
+                    </div>
                     <h4 class="font-bold text-xl mb-1">ARLEY VELASQUEZ</h4>
-                    <p class="text-sm opacity-80 mb-4">NARRADOR Y LOCUTOR</p>
-                    <a href="https://www.instagram.com/arley_vlz" target="_blank" class="inline-block bg-white text-[#3e2723] px-6 py-2 rounded-xl font-bold hover:bg-[#f4e8d1] transition-all"> <i class="fab fa-instagram"></i> VER MÁS </a>
+                    <p class="text-sm opacity-60 mb-6 uppercase tracking-widest">NARRADOR Y LOCUTOR</p>
+                    <div class="flex gap-4">
+                        <i class="fas fa-microphone-alt text-2xl"></i>
+                        <i class="fas fa-headphones text-2xl"></i>
+                        <i class="fas fa-play-circle text-2xl"></i>
+                    </div>
                 </div>
+                <!-- Menú Lateral Arley -->
+                <div class="portfolio-drawer text-left">
+                    <h3 class="font-black text-xl mb-4 text-white uppercase italic">Portafolio de Voz</h3>
+                    
+                    <div>
+                        <span class="work-title"><i class="fas fa-video mr-2"></i>Narración (Video)</span>
+                        <div class="video-container">
+                            <video controls muted loop poster="foto-perfil-2.jpg">
+                                <source src="video-narracion.mp4" type="video/mp4">
+                                Tu navegador no soporta el video.
+                            </video>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <span class="work-title"><i class="fas fa-microphone mr-2"></i>Locución Profesional</span>
+                        <audio controls>
+                            <source src="audio-locucion.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+
+                    <div>
+                        <span class="work-title"><i class="fas fa-shopping-cart mr-2"></i>Locución Comercial</span>
+                        <audio controls>
+                            <source src="audio-comercial.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+
+                    <a href="https://www.instagram.com/arley_vlz" target="_blank" class="bg-white text-[#3e2723] text-center py-3 rounded-xl font-bold text-xs mt-2">ESCRIBIR AL PRIVADO</a>
+                </div>
+                <div class="drawer-hint">VER Y OÍR <i class="fas fa-arrow-right"></i></div>
             </div>
+
         </div>
     </section>
 
-    <!-- Footer Final Optimizado -->
+    <!-- Footer -->
     <footer id="contacto" class="footer-section">
         <div class="footer-curve"></div>
         <div class="container mx-auto px-6 pt-10 text-white">
-            <h3 class="text-center font-bold text-2xl md:text-3xl mb-8 uppercase tracking-widest">Contáctanos</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
-                <!-- Columna QR -->
+            <h3 class="text-center font-bold text-2xl mb-12 uppercase tracking-widest">Contáctanos</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 items-center">
                 <div class="flex flex-col items-center">
-                    <div class="bg-white p-3 rounded-[20px] inline-block shadow-2xl">
-                        <img src="qr-contacto.png" alt="QR Contacto" width="130" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https://www.instagram.com/capy_studios_oficial'">
+                    <div class="bg-white p-3 rounded-[20px]">
+                        <img src="qr-contacto.png" alt="QR" width="130" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https://www.instagram.com/capy_studios_oficial'">
                     </div>
-                    <p class="mt-3 font-bold text-[10px] opacity-70 tracking-widest">@CAPY_STUDIOS_OFICIAL</p>
+                    <p class="mt-4 font-bold text-[10px] tracking-widest opacity-60">@CAPY_STUDIOS_OFICIAL</p>
                 </div>
-
-                <!-- Columna Redes Sociales -->
-                <div class="flex flex-col items-center justify-center space-y-3">
-                    <a href="https://www.tiktok.com/@capy_studios_oficial" target="_blank" class="social-button"> 
-                        <i class="fab fa-tiktok"></i> Tik Tok 
-                    </a>
-                    <a href="https://www.instagram.com/capy_studios_oficial" target="_blank" class="social-button"> 
-                        <i class="fab fa-instagram"></i> Instagram 
-                    </a>
-                    <a href="https://wa.me/584242510523?text=Buenas!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" target="_blank" class="social-button"> 
-                        <i class="fab fa-whatsapp"></i> Whatsapp 
-                    </a>
+                <div class="flex flex-col items-center space-y-4">
+                    <a href="https://www.tiktok.com/@capy_studios_oficial" class="social-button"><i class="fab fa-tiktok"></i> Tik Tok</a>
+                    <a href="https://www.instagram.com/capy_studios_oficial" class="social-button"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://wa.me/584242510523?text=Buenas!%20Estoy%20interesado%20en%20hacer%20crecer%20mi%20negocio%20con%20ustedes" class="social-button"><i class="fab fa-whatsapp"></i> Whatsapp</a>
                 </div>
-
-                <!-- Columna Mascota (Solo Escritorio) -->
-                <div class="hidden lg:flex justify-center items-end self-end">
-                    <img src="mascota-capy.png" alt="Mascota Capy" class="max-h-[260px] w-auto drop-shadow-2xl translate-y-4 hover:scale-105 transition-transform" onerror="this.style.display='none'">
+                <div class="hidden lg:flex justify-center">
+                    <img src="mascota-capy.png" alt="Capy" class="max-h-[250px] drop-shadow-2xl" onerror="this.style.display='none'">
                 </div>
             </div>
-
-            <!-- Mascota (Móvil) -->
-            <div class="lg:hidden flex justify-center mt-4">
-                <img src="mascota-capy.png" alt="Mascota Capy Móvil" class="max-h-[180px] w-auto drop-shadow-2xl translate-y-2" onerror="this.style.display='none'">
-            </div>
-
-            <div class="mt-8 border-t border-white/10 py-6 text-center text-[9px] opacity-40 uppercase tracking-[0.2em]"> 
-                © 2024 CAPY STUDIOS. TODO EL TERRITORIO NACIONAL. 
+            <div class="mt-12 border-t border-white/10 py-8 text-center text-[9px] opacity-40 uppercase tracking-widest"> 
+                © 2024 CAPY STUDIOS. TODOS LOS DERECHOS RESERVADOS. 
             </div>
         </div>
     </footer>
-
-    <script>
-        function updateDef(title, text) {
-            const display = document.getElementById('definition-display');
-            display.style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('def-title').innerText = title;
-                document.getElementById('def-text').innerText = text;
-                display.style.opacity = '1';
-            }, 150);
-        }
-    </script>
 </body>
 </html>
